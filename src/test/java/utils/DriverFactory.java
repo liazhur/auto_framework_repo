@@ -1,5 +1,6 @@
 package utils;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
@@ -12,16 +13,19 @@ public class DriverFactory {
 
 	private static final Map<DriverType, Supplier<WebDriver>> driverMap = new HashMap<>();
 
+	static String path = "src" + File.separator + "test" + File.separator + "resources" + File.separator + "%s"
+			+ File.separator + "%s";
+
 	// chrome driver supplier
 	private static final Supplier<WebDriver> chromeDriverSupplier = () -> {
-		System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chrome_drivers\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", String.format(path, "chrome-drivers", "chromedriver.exe"));
 		System.setProperty("webdriver.chrome.silentOutput", "true");
 		return new ChromeDriver();
 	};
 
 	// firefox driver supplier
 	private static final Supplier<WebDriver> firefoxDriverSupplier = () -> {
-		System.setProperty("webdriver.gecko.driver", "src\\test\\resources\\firefox_drivers\\geckodriver.exe");
+		System.setProperty("webdriver.gecko.driver", String.format(path, "firefox-drivers", "geckodriver.exe"));
 		System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "true");
 		System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "browser_logs.txt");
 		return new FirefoxDriver();

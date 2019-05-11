@@ -7,7 +7,7 @@ import os.OSType;
 
 @SuppressWarnings("all")
 public class StoreProperties {
-	private static final String PROPERTIES_FILENAME = "store_automation.properties";
+	private static final String PROPERTIES_FILENAME = "store-automation.properties";
 	private static final Properties properties = loadProperties(PROPERTIES_FILENAME);
 //	public static final DriverFactory.DriverType BROWSER = DriverFactory.DriverType
 //			.getDriver(properties.getProperty("BROWSER"));
