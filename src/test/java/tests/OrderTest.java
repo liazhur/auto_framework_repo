@@ -51,10 +51,12 @@ public class OrderTest extends BaseTest {
 		basicStep.goToURL(StoreProperties.URL);
 
 		basicStep.selectSubMenu(Tab.WOMEN, SubMenu.SUMMER_DRESSES);
+
 		basicStep.goToView(View.GRID);
+
 		basicStep.quickViewProduct(Products.PRINTED_CHIFFON_DRESS);
 
-		fillFormStep.selectSize("M");
+		fillFormStep.selectSize(Products.SIZE_M);
 		fillFormStep.addToCart();
 		fillFormStep.contShopBtnClick();
 
@@ -63,8 +65,11 @@ public class OrderTest extends BaseTest {
 
 		purchaseStep.enterEmailCreateAccount(data.getEmail());
 
-		fillFormStep.registerPersonalInfo(data);
-		fillFormStep.proceedToCheckout();
+		purchaseStep.registerPersonalInfo(data);
+		purchaseStep.proceedToCheckout();
+		purchaseStep.agreeTermsOfServiceProceed();
+
+		purchaseStep.verifyOrderOnPaymentTab();
 
 		System.out.println("not end");
 	}

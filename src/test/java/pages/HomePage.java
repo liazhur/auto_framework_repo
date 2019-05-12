@@ -12,19 +12,17 @@ public class HomePage extends BasePage {
 		super(driver, wait);
 	}
 
+	public HomePage(WebDriver driver) {
+		super(driver);
+	}
+
 	// *********Page Variables*********
-//	String baseURL = "http://automationpractice.com";
 
 	// *********Web Elements*********
-//	String signInButtonClass = "btnSignIn";// !!delete
 	@FindBy(css = "a[title='View my shopping cart']")
 	private WebElement cartWebEl;
 
 	// *********Page Methods*********
-//	public String getURL() {
-//		return baseURL;
-//	}
-
 	public WebElement getCartWebElement() {
 		return cartWebEl;
 	}

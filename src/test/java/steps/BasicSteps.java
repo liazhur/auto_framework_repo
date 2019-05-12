@@ -33,6 +33,7 @@ public class BasicSteps extends MainHeaderAbstractPage {
 
 	@Step("Select tab: {tab} and submenu {sMenu}")
 	public void selectSubMenu(Tab tab, SubMenu sMenu) {
+		HomePage homePage = new HomePage(driver);
 		selectSMenu(tab, sMenu);
 	}
 
