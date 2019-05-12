@@ -1,18 +1,17 @@
-package pages.product;
+package pages.tabs;
 
 import org.openqa.selenium.WebDriver;
 
 import pages.MainHeaderAbstractPage;
-import pages.Tab;
 
-public class ProductsAbstractPage extends MainHeaderAbstractPage {
+public class TabsAbstractPage extends MainHeaderAbstractPage {
 
 	protected Tab tab;
 //	public ProductsAbstractPage(WebDriver driver, WebDriverWait wait) {
 //		super(driver, wait);
 //	}
 
-	public ProductsAbstractPage(WebDriver driver, Tab tab) {
+	public TabsAbstractPage(WebDriver driver, Tab tab) {
 		super(driver);
 		this.tab = tab;
 	}

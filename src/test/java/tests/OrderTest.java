@@ -11,7 +11,14 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
-import steps.HomePageSteps;
+import pages.SubMenu;
+import pages.checkout.UserData;
+import pages.products.Products;
+import pages.subcategories.View;
+import pages.tabs.Tab;
+import steps.BasicSteps;
+import steps.FormFillSteps;
+import steps.PurchaseSteps;
 import utils.Log;
 import utils.StoreProperties;
 import utils.ExtentReports.ExtentTestManager;
@@ -33,12 +40,33 @@ public class OrderTest extends BaseTest {
 		ExtentTestManager.getTest().setDescription("Product Flow Scenario");
 
 		// *************PAGE INSTANTIATIONS*************
-		HomePageSteps homePage = new HomePageSteps(driver, wait);
+		BasicSteps basicStep = new BasicSteps(driver, wait);
+		FormFillSteps fillFormStep = new FormFillSteps(driver, wait);
+		PurchaseSteps purchaseStep = new PurchaseSteps(driver);
+		UserData data = new UserData();
 
 		// *************PAGE METHODS********************
 		// Open HomePage
 		Log.info("Opening Store website.");
-		homePage.goToURL(StoreProperties.URL);
+		basicStep.goToURL(StoreProperties.URL);
+
+		basicStep.selectSubMenu(Tab.WOMEN, SubMenu.SUMMER_DRESSES);
+		basicStep.goToView(View.GRID);
+		basicStep.quickViewProduct(Products.PRINTED_CHIFFON_DRESS);
+
+		fillFormStep.selectSize("M");
+		fillFormStep.addToCart();
+		fillFormStep.contShopBtnClick();
+
+		basicStep.goToCart();
+		purchaseStep.proceedCheckout();
+
+		purchaseStep.enterEmailCreateAccount(data.getEmail());
+
+		fillFormStep.registerPersonalInfo(data);
+		fillFormStep.proceedToCheckout();
+
+		System.out.println("not end");
 	}
 
 }

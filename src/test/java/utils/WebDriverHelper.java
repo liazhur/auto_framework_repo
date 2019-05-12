@@ -3,6 +3,7 @@ package utils;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -37,6 +38,11 @@ public class WebDriverHelper {
 		return webDriver.findElement(By.xpath(xpath));
 	}
 
+	public static WebElement findElementByCss(final WebDriver webDriver, final String css, final long timeOutSeconds) {
+		waitNextAction(webDriver, timeOutSeconds);
+		return webDriver.findElement(By.cssSelector(css));
+	}
+
 	public static WebElement findElementByID(final WebDriver webDriver, final String id, final long timeOutSeconds) {
 		waitNextAction(webDriver, timeOutSeconds);
 		return webDriver.findElement(By.id(id));
@@ -44,6 +50,14 @@ public class WebDriverHelper {
 
 	public static void moveToElement(final WebDriver webDriver, final WebElement webElement) {
 		(new Actions(webDriver)).moveToElement(webElement).build().perform();
+	}
+
+	public static void moveToElementClick(final WebDriver webDriver, final WebElement webElement) {
+		(new Actions(webDriver)).moveToElement(webElement).click().build().perform();
+	}
+
+	public static void scrollToView(final WebDriver webDriver, final WebElement webElement) {
+		((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView(true);", webElement);
 	}
 
 	public static void sleepSeconds(int seconds) {

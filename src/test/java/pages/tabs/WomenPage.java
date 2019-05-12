@@ -1,10 +1,8 @@
-package pages.product;
+package pages.tabs;
 
 import org.openqa.selenium.WebDriver;
 
-import pages.Tab;
-
-public class WomenPage extends ProductsAbstractPage {
+public class WomenPage extends TabsAbstractPage {
 
 	public WomenPage(WebDriver driver) {
 		super(driver, Tab.WOMEN);
