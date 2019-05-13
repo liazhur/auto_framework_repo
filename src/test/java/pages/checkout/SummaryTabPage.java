@@ -9,7 +9,7 @@ import pages.BasePage;
 
 public class SummaryTabPage extends BasePage {
 
-	@FindBy(name = "processAddress")
+	@FindBy(css = "a.standard-checkout")
 	private WebElement checkoutBtn;
 
 	public SummaryTabPage(WebDriver driver, WebDriverWait wait) {

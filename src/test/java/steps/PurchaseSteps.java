@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import io.qameta.allure.Step;
 import pages.MainHeaderAbstractPage;
 import pages.checkout.AddressTabPage;
-import pages.checkout.PaymentTab;
+import pages.checkout.PaymentTabPage;
 import pages.checkout.ShippingTabPage;
 import pages.checkout.SignInCreateAccountTabPage;
 import pages.checkout.SignInPersonalInfoTabPage;
@@ -42,6 +42,7 @@ public class PurchaseSteps extends MainHeaderAbstractPage {
 		SignInPersonalInfoTabPage persInfPage = new SignInPersonalInfoTabPage(driver, wait);
 		persInfPage.getFirstNameTextField().sendKeys(data.getFirstName());
 		persInfPage.getLastNameTextField().sendKeys(data.getLastName());
+		persInfPage.getPasswordTextField().sendKeys(data.getPassw());
 		persInfPage.getCityTextField().sendKeys(data.getCity());
 		persInfPage.getAddressTextField().sendKeys(data.getAddress());
 
@@ -63,19 +64,21 @@ public class PurchaseSteps extends MainHeaderAbstractPage {
 	}
 
 	@Step("Agree to 'Terms of service' and Click 'Proceed'")
-	public PaymentTab agreeTermsOfServiceProceed() {
+	public PaymentTabPage agreeTermsOfServiceProceed() {
 		ShippingTabPage shippingPage = new ShippingTabPage(driver, wait);
 
 		if (!shippingPage.getTermsOfServiceCheckBox().isSelected()) {
 			shippingPage.getTermsOfServiceCheckBox().click();
 		}
 		shippingPage.getProceedCheckoutBtn().click();
-		return new PaymentTab(driver, wait);
+		return new PaymentTabPage(driver, wait);
 	}
 
 	@Step("Confirm the correct order on 'Payment' tab")
 	public boolean verifyOrderOnPaymentTab() {
-
+		PaymentTabPage paymentTabPage = new PaymentTabPage(driver);
+		paymentTabPage.getPaymentTable();
+		paymentTabPage.getElementFromTable();
 		return false;
 
 	}
