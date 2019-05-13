@@ -37,7 +37,6 @@ public class MainHeaderAbstractPage extends BasePage {
 		WebDriverHelper.findElementByXpath(driver, String.format(tabXpath, tab.getName()), this.PAGE_LOADING_TIMEOUT)
 				.click();
 		MainHeaderAbstractPage page = tabs.get(tab).get();
-//		page.waitForPage();
 		return page;
 	}
 
@@ -48,7 +47,9 @@ public class MainHeaderAbstractPage extends BasePage {
 
 	protected void selectSMenu(Tab tab, SubMenu sMenu) {
 		moveMouseToTab(tab);
-		WebDriverHelper.sleepSeconds(3);// TODO delete
+		WebDriverHelper.sleepSeconds(3);// TODO refactor, replace to wait
+		WebDriverHelper.waitNextAction(driver, 5);
+
 		WebDriverHelper.moveToElementClick(driver, WebDriverHelper.findElementByCss(driver,
 				String.format(subMenuCss, sMenu.getName()), this.ELEMENT_APPEAR_TIMEOUT_LONG));
 	}

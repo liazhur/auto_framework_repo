@@ -4,11 +4,11 @@ import java.util.Random;
 
 public class UserData {
 
-	String firstName = "a";
-	String lastName = "d";
-	String email = "email" + randomNum() + "aa@gmail.com";
+	String firstName = "Iuliia";
+	String lastName = "S";
+	String email = "email" + randomNum() + "@gmail.com";
 	String passw = generateMyPass();
-	String address = "sdfsggbfb";
+	String address = "12, Nice Address";
 	String city = "Ottawa";
 	String state = "Colorado";
 	String zip = "12345";
@@ -113,7 +113,7 @@ public class UserData {
 
 	public String generateMyPass() {
 		int aNumber = 0;
-		aNumber = (int) ((Math.random() * 90000) + 10000);
+		aNumber = (int) ((Math.random() * 9000000) + 1000000);
 		return String.valueOf(aNumber);
 	}
 }

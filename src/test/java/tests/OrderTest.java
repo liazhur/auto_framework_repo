@@ -1,8 +1,7 @@
 package tests;
 
-import java.lang.reflect.Method;
-
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -27,18 +26,24 @@ import utils.Listeners.TestListener;
 
 @Listeners({ TestListener.class })
 @Epic("Functional Test")
-@Feature("Order Tests")
+@Feature("Checkout Tests")
 public class OrderTest extends BaseTest {
 
-	@Test(priority = 1, description = "Basic checkout flow")
+	@DataProvider(name = "products")
+	public static Object[][] getProductsMap() {
+		return new Object[][] { { Tab.WOMEN, SubMenu.SUMMER_DRESSES, "Printed Chiffon Dress", "M" } };
+	}
+
+	@Test(priority = 1, dataProvider = "products", description = "Basic checkout flow")
 	@Severity(SeverityLevel.BLOCKER)
 	@Description("Test Description: basic flow of selecting a product, registering an account and proceeding through checkout.")
 	@Story("Automate scenario: selecting product flow")
-	public void productFlowScenario(Method method) throws InterruptedException {
-		Log.info(method.getName() + " test is starting.");
+	public void productCheckoutScenario(Tab tab, SubMenu subMenu, String productName, String size)
+			throws InterruptedException {
+//		Log.info(method.getName() + " test is starting.");
 
 		// ExtentReports Description
-		ExtentTestManager.getTest().setDescription("Product Flow Scenario");
+		ExtentTestManager.getTest().setDescription("Product Checkout Flow Scenario");
 
 		// *************PAGE INSTANTIATIONS*************
 		BasicSteps basicStep = new BasicSteps(driver, wait);
@@ -51,22 +56,21 @@ public class OrderTest extends BaseTest {
 		// *************STEP METHODS********************
 		Log.info("Opening Store website.");
 		basicStep.goToURL(StoreProperties.URL);
-		basicStep.selectSubMenu(Tab.WOMEN, SubMenu.SUMMER_DRESSES);
+		basicStep.selectSubMenu(tab, subMenu);
 		basicStep.goToView(View.GRID);
-		basicStep.quickViewProduct(productExpected.getProductName());
+		basicStep.quickViewProduct(productName);
 
-		fillFormStep.selectSize(productExpected.getSize());
+		fillFormStep.selectSize(size);
 		fillFormStep.addToCart();
 		fillFormStep.contShopBtnClick();
 		basicStep.goToCart();
 
 		String productDescription = purchaseStep.getProductDescriptionFromSummaryTabPage(productExpected);
 
-		Assert.assertTrue(productDescription.contains(productExpected.getProductName()),
-				"Summary Tab Page doesn't contain product name " + productExpected.getProductName());
+		Assert.assertTrue(productDescription.contains(productName),
+				"Summary Tab Page doesn't contain product name " + productName);
 
-		Assert.assertTrue(productDescription.contains(productExpected.getSize()),
-				"Summary Tab Page doesn't contain product size " + productExpected.getSize());
+		Assert.assertTrue(productDescription.contains(size), "Summary Tab Page doesn't contain product size " + size);
 
 		purchaseStep.proceedCheckout();
 		purchaseStep.enterEmailCreateAccount(data.getEmail());

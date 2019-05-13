@@ -55,6 +55,7 @@ public class PurchaseSteps extends MainHeaderAbstractPage {
 
 	@Step("Get product description from Summary Page")
 	public String getProductDescriptionFromSummaryTabPage(Product productExpected) {
+		Log.info("Geting product description from Summary Page...");
 		return getProductFromSummaryTab(productExpected).getTableValues().get(descriptionColumn).toString();
 	}
 
@@ -63,7 +64,7 @@ public class PurchaseSteps extends MainHeaderAbstractPage {
 		SignInCreateAccountTabPage signInPage = new SignInCreateAccountTabPage(driver, wait);
 		signInPage.getEmailTextBox().sendKeys(emailAddress);
 		signInPage.getCreateAnAccountBtn().click();
-		Log.info("Enter email and create an account");
+		Log.info("Entered email and created an account");
 	}
 
 	@Step("Fill Personal Information")
@@ -80,6 +81,7 @@ public class PurchaseSteps extends MainHeaderAbstractPage {
 
 		persInfPage.getZipTextField().sendKeys(data.getZip());
 		persInfPage.getMphoneTextField().sendKeys(data.getMobile());
+		persInfPage.getAliasTextField().clear();
 		persInfPage.getAliasTextField().sendKeys(data.getAlias());
 		persInfPage.getRegisterBtn().click();
 		Log.info("Personal Information successfully filled");
@@ -102,7 +104,7 @@ public class PurchaseSteps extends MainHeaderAbstractPage {
 			shippingPage.getTermsOfServiceCheckBox().click();
 		}
 		shippingPage.getProceedCheckoutBtn().click();
-		Log.info("Agreed to 'Terms of service' and Clicked 'Proceed");
+		Log.info("Agreed to 'Terms of service' and Clicked 'Proceed'");
 		return new PaymentTabPage(driver, wait);
 	}
 
@@ -119,6 +121,7 @@ public class PurchaseSteps extends MainHeaderAbstractPage {
 		actualProduct.setTotalProducts(totalProducts);
 		actualProduct.setTotalShippingValue(totalShipping);
 		actualProduct.setTotalValue(totalGeneral);
+		Log.info("Got Product values from 'Payment' tab");
 		return actualProduct;
 
 	}

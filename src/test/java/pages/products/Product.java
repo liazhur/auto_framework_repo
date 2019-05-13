@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Product {
 
-	String productName = "Printed Chiffon Dress";
-	String size = "M";
+	String productName;
+	String size;
 	String totalProducts;
 	String totalShippingValue;
 	String totalValue;
