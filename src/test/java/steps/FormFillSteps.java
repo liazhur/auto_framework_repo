@@ -6,7 +6,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import io.qameta.allure.Step;
 import pages.MainHeaderAbstractPage;
 import pages.checkout.CartQuickViewPage;
-import pages.products.Products;
 import pages.products.ProductsAbstractPage;
 import utils.WebDriverHelper;
 
@@ -21,7 +20,7 @@ public class FormFillSteps extends MainHeaderAbstractPage {
 	}
 
 	@Step("Select size")
-	public void selectSize(Products size) {
+	public void selectSize(String size) {
 		ProductsAbstractPage viewPage = new ProductsAbstractPage(driver);
 		viewPage.selectSize(size);
 	}
@@ -37,6 +36,7 @@ public class FormFillSteps extends MainHeaderAbstractPage {
 	public void contShopBtnClick() {
 		CartQuickViewPage cPage = new CartQuickViewPage(driver, wait);
 		WebDriverHelper.waitForElementVisibility(driver, cPage.getContinueShoppingBtn(), 10);
+		WebDriverHelper.sleepSeconds(1);
 		cPage.getContinueShoppingBtn().click();
 	}
 

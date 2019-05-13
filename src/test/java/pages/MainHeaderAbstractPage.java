@@ -8,7 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import pages.products.ProductQuickViewPage;
-import pages.products.Products;
 import pages.subcategories.View;
 import pages.tabs.DressesPage;
 import pages.tabs.TShirtsPage;
@@ -60,13 +59,13 @@ public class MainHeaderAbstractPage extends BasePage {
 				.click();
 	}
 
-	public ProductQuickViewPage quickViewProduct(Products product) {
+	public ProductQuickViewPage quickViewProduct(String productName) {
 		String prodImageCss = ".product_list.grid img[title = '%s']";
-		WebElement el = WebDriverHelper.findElementByCss(driver, String.format(prodImageCss, product.getName()),
+		WebElement el = WebDriverHelper.findElementByCss(driver, String.format(prodImageCss, productName),
 				this.ELEMENT_APPEAR_TIMEOUT_LONG);
 		WebDriverHelper.scrollToView(driver, el);
 		WebDriverHelper.moveToElementClick(driver, WebDriverHelper.findElementByCss(driver,
-				String.format(prodImageCss, product.getName()), this.ELEMENT_APPEAR_TIMEOUT_LONG));
+				String.format(prodImageCss, productName), this.ELEMENT_APPEAR_TIMEOUT_LONG));
 		return new ProductQuickViewPage(driver, wait);
 	}
 

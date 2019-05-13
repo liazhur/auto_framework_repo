@@ -1,5 +1,7 @@
 package steps;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -13,9 +15,12 @@ import pages.checkout.SignInCreateAccountTabPage;
 import pages.checkout.SignInPersonalInfoTabPage;
 import pages.checkout.SummaryTabPage;
 import pages.checkout.UserData;
+import pages.products.Product;
 import utils.Log;
 
 public class PurchaseSteps extends MainHeaderAbstractPage {
+
+	int descriptionColumn = 1;
 
 	public PurchaseSteps(WebDriver driver) {
 		super(driver);
@@ -25,11 +30,32 @@ public class PurchaseSteps extends MainHeaderAbstractPage {
 		super(driver);
 	}
 
+	@Step("Get Product from Summary Tab Page")
+	public Product getProductFromSummaryTab(Product productExpected) {
+		SummaryTabPage summaryPage = new SummaryTabPage(driver);
+
+		List<String> tableValues = summaryPage.getValuesFromTable();
+		String totalProductsValue = summaryPage.getTotalProducts().getText();
+		String totalShippingValue = summaryPage.getTotalShipping().getText();
+		String totalValue = summaryPage.getTotalValue().getText();
+
+		productExpected.setTableValues(tableValues);
+		productExpected.setTotalProducts(totalProductsValue);
+		productExpected.setTotalShippingValue(totalShippingValue);
+		productExpected.setTotalValue(totalValue);
+		return productExpected;
+	}
+
 	@Step("Click 'Proceed to checkout' button")
 	public void proceedCheckout() {
-		SummaryTabPage checkoutPage = new SummaryTabPage(driver, wait);
-		checkoutPage.getProceedCheckoutBtn().click();
+		SummaryTabPage summaryPage = new SummaryTabPage(driver);
+		summaryPage.getProceedCheckoutBtn().click();
 		Log.info("Click 'Proceed to checkout' button");
+	}
+
+	@Step("Get product description from Summary Page")
+	public String getProductDescriptionFromSummaryTabPage(Product productExpected) {
+		return getProductFromSummaryTab(productExpected).getTableValues().get(descriptionColumn).toString();
 	}
 
 	@Step("Enter email and create an account")
@@ -38,7 +64,6 @@ public class PurchaseSteps extends MainHeaderAbstractPage {
 		signInPage.getEmailTextBox().sendKeys(emailAddress);
 		signInPage.getCreateAnAccountBtn().click();
 		Log.info("Enter email and create an account");
-
 	}
 
 	@Step("Fill Personal Information")
@@ -81,12 +106,20 @@ public class PurchaseSteps extends MainHeaderAbstractPage {
 		return new PaymentTabPage(driver, wait);
 	}
 
-	@Step("Confirm the correct order on 'Payment' tab")
-	public boolean verifyOrderOnPaymentTab() {
+	@Step("Get Product values from 'Payment' tab")
+	public Product getProductFromPaymentTab(Product actualProduct) {
 		PaymentTabPage paymentTabPage = new PaymentTabPage(driver);
-		paymentTabPage.getPaymentTable();
-		paymentTabPage.getElementFromTable();
-		return false;
+		List<String> actualValuesList = paymentTabPage.getValuesFromTable();
+
+		String totalProducts = paymentTabPage.getTotalProducts().getText();
+		String totalShipping = paymentTabPage.getTotalShipping().getText();
+		String totalGeneral = paymentTabPage.getTotalValue().getText();
+
+		actualProduct.setTableValues(actualValuesList);
+		actualProduct.setTotalProducts(totalProducts);
+		actualProduct.setTotalShippingValue(totalShipping);
+		actualProduct.setTotalValue(totalGeneral);
+		return actualProduct;
 
 	}
 

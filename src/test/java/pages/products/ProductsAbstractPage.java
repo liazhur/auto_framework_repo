@@ -28,10 +28,10 @@ public class ProductsAbstractPage extends MainHeaderAbstractPage {
 		super(driver);
 	}
 
-	public void selectSize(Products size) {
+	public void selectSize(String size) {
 		WebElement dropdown = driver.findElement(By.name("group_1"));
 		Select select = new Select(dropdown);
-		select.selectByVisibleText(size.getName());
+		select.selectByVisibleText(size);
 
 	}
 

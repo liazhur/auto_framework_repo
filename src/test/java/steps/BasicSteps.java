@@ -8,7 +8,6 @@ import pages.HomePage;
 import pages.MainHeaderAbstractPage;
 import pages.SubMenu;
 import pages.checkout.SummaryTabPage;
-import pages.products.Products;
 import pages.subcategories.View;
 import pages.tabs.Tab;
 import pages.tabs.TabsAbstractPage;
@@ -47,8 +46,8 @@ public class BasicSteps extends MainHeaderAbstractPage {
 	}
 
 	@Step("Open Quick view product")
-	public void openQuickViewProduct(Products product) {
-		quickViewProduct(product);
+	public void openQuickViewProduct(String productName) {
+		quickViewProduct(productName);
 		Log.info("Quick view oppened");
 	}
 

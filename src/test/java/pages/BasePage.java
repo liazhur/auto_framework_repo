@@ -1,11 +1,18 @@
 package pages;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePage {
+	@FindBy(css = "table[id='cart_summary']")
+	private WebElement table;
 
 	public static final long PAGE_LOADING_TIMEOUT = 25;
 	public static final long ELEMENT_APPEAR_TIMEOUT = 5;
@@ -34,14 +41,22 @@ public class BasePage {
 	public void click(By elementLocation) {
 		driver.findElement(elementLocation).click();
 	}
-//
-//	// Write Text
-//	public void writeText(By elementLocation, String text) {
-//		driver.findElement(elementLocation).sendKeys(text);
-//	}
-//
-//	// Read Text
-//	public String readText(By elementLocation) {
-//		return driver.findElement(elementLocation).getText();
-//	}
+
+	public List<String> getValuesFromTable() {
+		List<WebElement> tableRows = table.findElements(By.tagName("tr"));
+		List<WebElement> Cols = new ArrayList<WebElement>();
+		List<String> values = new ArrayList<String>();
+		for (int i = 0; i < tableRows.size(); i++) {
+			WebElement row = tableRows.get(i);
+		}
+		for (int i = 0; i < tableRows.size(); i++) {
+			Cols = tableRows.get(i).findElements(By.tagName("td"));
+		}
+
+		for (int j = 0; j < Cols.size(); j++) {
+			String el = Cols.get(j).getText();
+			values.add(el);
+		}
+		return values;
+	}
 }
