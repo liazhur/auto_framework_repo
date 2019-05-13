@@ -9,7 +9,7 @@ import pages.BasePage;
 
 public class AddressTabPage extends BasePage {
 
-	@FindBy(css = "div[id=layer_cart] span[title='Continue shopping']")
+	@FindBy(css = "button[name='processAddress']")
 	private WebElement proceedToCheckoutBtn;
 
 	public AddressTabPage(WebDriver driver, WebDriverWait wait) {

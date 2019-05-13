@@ -13,6 +13,7 @@ import pages.checkout.SignInCreateAccountTabPage;
 import pages.checkout.SignInPersonalInfoTabPage;
 import pages.checkout.SummaryTabPage;
 import pages.checkout.UserData;
+import utils.Log;
 
 public class PurchaseSteps extends MainHeaderAbstractPage {
 
@@ -28,6 +29,7 @@ public class PurchaseSteps extends MainHeaderAbstractPage {
 	public void proceedCheckout() {
 		SummaryTabPage checkoutPage = new SummaryTabPage(driver, wait);
 		checkoutPage.getProceedCheckoutBtn().click();
+		Log.info("Click 'Proceed to checkout' button");
 	}
 
 	@Step("Enter email and create an account")
@@ -35,6 +37,8 @@ public class PurchaseSteps extends MainHeaderAbstractPage {
 		SignInCreateAccountTabPage signInPage = new SignInCreateAccountTabPage(driver, wait);
 		signInPage.getEmailTextBox().sendKeys(emailAddress);
 		signInPage.getCreateAnAccountBtn().click();
+		Log.info("Enter email and create an account");
+
 	}
 
 	@Step("Fill Personal Information")
@@ -53,6 +57,7 @@ public class PurchaseSteps extends MainHeaderAbstractPage {
 		persInfPage.getMphoneTextField().sendKeys(data.getMobile());
 		persInfPage.getAliasTextField().sendKeys(data.getAlias());
 		persInfPage.getRegisterBtn().click();
+		Log.info("Personal Information successfully filled");
 		return new SummaryTabPage(driver, wait);
 	}
 
@@ -60,6 +65,7 @@ public class PurchaseSteps extends MainHeaderAbstractPage {
 	public ShippingTabPage proceedToCheckout() {
 		AddressTabPage addressTabPage = new AddressTabPage(driver, wait);
 		addressTabPage.getProceedCheckoutBtn().click();
+		Log.info("Proceed to checkout from Address Tab");
 		return new ShippingTabPage(driver, wait);
 	}
 
@@ -71,6 +77,7 @@ public class PurchaseSteps extends MainHeaderAbstractPage {
 			shippingPage.getTermsOfServiceCheckBox().click();
 		}
 		shippingPage.getProceedCheckoutBtn().click();
+		Log.info("Agreed to 'Terms of service' and Clicked 'Proceed");
 		return new PaymentTabPage(driver, wait);
 	}
 

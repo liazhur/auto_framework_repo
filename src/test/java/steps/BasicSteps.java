@@ -12,6 +12,7 @@ import pages.products.Products;
 import pages.subcategories.View;
 import pages.tabs.Tab;
 import pages.tabs.TabsAbstractPage;
+import utils.Log;
 
 public class BasicSteps extends MainHeaderAbstractPage {
 
@@ -35,22 +36,27 @@ public class BasicSteps extends MainHeaderAbstractPage {
 	public void selectSubMenu(Tab tab, SubMenu sMenu) {
 		HomePage homePage = new HomePage(driver);
 		selectSMenu(tab, sMenu);
+		Log.info("Selected sub menu");
 	}
 
 	@Step("Go to View: {view}")
 	public void goToView(View view) {
 		toView(view);
+		Log.info("Oppened view");
+
 	}
 
 	@Step("Open Quick view product")
 	public void openQuickViewProduct(Products product) {
 		quickViewProduct(product);
+		Log.info("Quick view oppened");
 	}
 
 	@Step("Go to Cart")
 	public SummaryTabPage goToCart() {
 		HomePage homePage = new HomePage(driver, wait);
 		homePage.getCartWebElement().click();
+		Log.info("Go to Cart");
 		return new SummaryTabPage(driver, wait);
 	}
 }
