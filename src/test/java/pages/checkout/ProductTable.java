@@ -13,16 +13,16 @@ import pages.BasePage;
 
 public class ProductTable extends BasePage {
 
-	@FindBy(css = "table[id='cart_summary']")
+	@FindBy(id = "cart_summary")
 	private WebElement paymentTable;
 
-	@FindBy(css = "span[id='total_price']")
+	@FindBy(id = "total_price")
 	private WebElement totalValue;
 
-	@FindBy(css = "[id='total_shipping']")
+	@FindBy(id = "total_shipping")
 	private WebElement totalShipping;
 
-	@FindBy(css = "[id='total_product']")
+	@FindBy(id = "total_product")
 	private WebElement totalProducts;
 
 	public ProductTable(WebDriver driver, WebDriverWait wait) {

@@ -9,37 +9,37 @@ import pages.BasePage;
 
 public class SignInPersonalInfoTabPage extends BasePage {
 
-	@FindBy(css = "input[id='customer_firstname']")
+	@FindBy(id = "customer_firstname")
 	private WebElement firstNameTextField;
 
-	@FindBy(css = "input[id='customer_lastname']")
+	@FindBy(id = "customer_lastname")
 	private WebElement lastNameTextField;
 
-	@FindBy(css = "input[id='email']")
+	@FindBy(id = "email")
 	private WebElement emailTextField;
 
-	@FindBy(css = "input[id='address1']")
+	@FindBy(id = "address1")
 	private WebElement addressTextField;
 
-	@FindBy(css = "input[id='passwd']")
+	@FindBy(id = "passwd")
 	private WebElement passTextField;
 
-	@FindBy(css = "input[id='city']")
+	@FindBy(id = "city")
 	private WebElement cityTextField;
 
-	@FindBy(css = "select[id='id_state']")
+	@FindBy(id = "id_state")
 	private WebElement stateDropDown;
 
-	@FindBy(css = "input[id='postcode']")
+	@FindBy(id = "postcode")
 	private WebElement zipTextField;
 
-	@FindBy(css = "select[id='id_country']")
+	@FindBy(id = "id_country")
 	private WebElement countryDropDown;
 
-	@FindBy(css = "input[id='phone_mobile']")
+	@FindBy(id = "phone_mobile")
 	private WebElement mPhoneTextField;
 
-	@FindBy(css = "input[id='alias']")
+	@FindBy(id = "alias")
 	private WebElement addressAliasTextField;
 
 	@FindBy(id = "submitAccount")
