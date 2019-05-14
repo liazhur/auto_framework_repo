@@ -1,6 +1,5 @@
 package tests;
 
-import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -65,12 +64,7 @@ public class ProductCheckoutTest extends BaseTest {
 		fillFormStep.contShopBtnClick();
 		basicStep.goToCart();
 
-		String productDescription = purchaseStep.getProductDescriptionFromSummaryTabPage(productExpected);
-
-		Assert.assertTrue(productDescription.contains(productName),
-				"Summary Tab Page doesn't contain product name " + productName);
-
-		Assert.assertTrue(productDescription.contains(size), "Summary Tab Page doesn't contain product size " + size);
+		purchaseStep.verifyProductSummary(productName, size, productExpected);
 
 		purchaseStep.proceedCheckout();
 		purchaseStep.enterEmailCreateAccount(data.getEmail());
@@ -79,13 +73,7 @@ public class ProductCheckoutTest extends BaseTest {
 		purchaseStep.agreeTermsOfServiceProceed();
 		purchaseStep.getProductFromPaymentTab(productActual);
 
-		Assert.assertEquals(productActual.getTotalProducts(), productExpected.getTotalProducts(),
-				"Total Products value is incorrect");
-		Assert.assertEquals(productActual.getTotalShippingValue(), productExpected.getTotalShippingValue(),
-				"Shipping Value is incorrect");
-		Assert.assertEquals(productActual.getTotalValue(), productExpected.getTotalValue(), "Total Value is incorrect");
-		Assert.assertTrue(productActual.getTableValues().containsAll(productExpected.getTableValues()),
-				"Product Table Values are incorrect");
+		purchaseStep.verifyProductPurchase(productExpected, productActual);
 	}
 
 }

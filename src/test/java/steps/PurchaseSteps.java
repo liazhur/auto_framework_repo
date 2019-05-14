@@ -5,6 +5,7 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import io.qameta.allure.Step;
 import pages.MainHeaderAbstractPage;
@@ -123,7 +124,25 @@ public class PurchaseSteps extends MainHeaderAbstractPage {
 		actualProduct.setTotalValue(totalGeneral);
 		Log.info("Got Product values from 'Payment' tab");
 		return actualProduct;
+	}
 
+	public void verifyProductSummary(String productName, String size, Product productExpected) {
+		String productDescription = getProductDescriptionFromSummaryTabPage(productExpected);
+
+		Assert.assertTrue(productDescription.contains(productName),
+				"Summary Tab Page doesn't contain product name " + productName);
+
+		Assert.assertTrue(productDescription.contains(size), "Summary Tab Page doesn't contain product size " + size);
+	}
+
+	public void verifyProductPurchase(Product productExpected, Product productActual) {
+		Assert.assertEquals(productActual.getTotalProducts(), productExpected.getTotalProducts(),
+				"Total Products value is incorrect");
+		Assert.assertEquals(productActual.getTotalShippingValue(), productExpected.getTotalShippingValue(),
+				"Shipping Value is incorrect");
+		Assert.assertEquals(productActual.getTotalValue(), productExpected.getTotalValue(), "Total Value is incorrect");
+		Assert.assertTrue(productActual.getTableValues().containsAll(productExpected.getTableValues()),
+				"Product Table Values are incorrect");
 	}
 
 }
