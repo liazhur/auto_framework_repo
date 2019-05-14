@@ -33,7 +33,7 @@ public class FormFillSteps extends MainHeaderAbstractPage {
 	}
 
 	@Step("Click Continue Shopping Button")
-	public void contShopBtnClick() {
+	public void continueShopping() {
 		CartQuickViewPage cPage = new CartQuickViewPage(driver, wait);
 		WebDriverHelper.waitForElementVisibility(driver, cPage.getContinueShoppingBtn(), 10);
 		WebDriverHelper.sleepSeconds(1);// TODO refactor

@@ -51,7 +51,7 @@ public class BasicSteps extends MainHeaderAbstractPage {
 	}
 
 	@Step("Go to Cart")
-	public SummaryTabPage goToCart() {
+	public SummaryTabPage openCart() {
 		HomePage homePage = new HomePage(driver, wait);
 		homePage.getCartWebElement().click();
 		Log.info("Go to Cart");

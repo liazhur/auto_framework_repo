@@ -60,8 +60,8 @@ public class ProductCheckoutTest extends BaseTest {
 
 		fillFormStep.selectSize(size);
 		fillFormStep.addToCart();
-		fillFormStep.contShopBtnClick();
-		basicStep.goToCart();
+		fillFormStep.continueShopping();
+		basicStep.openCart();
 
 		purchaseStep.verifyProductSummary(productName, size, productExpected);
 
