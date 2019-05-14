@@ -9,8 +9,8 @@ import os.OSType;
 public class StoreProperties {
 	private static final String PROPERTIES_FILENAME = "store-automation.properties";
 	private static final Properties properties = loadProperties(PROPERTIES_FILENAME);
-//	public static final DriverFactory.DriverType BROWSER = DriverFactory.DriverType
-//			.getDriver(properties.getProperty("BROWSER"));
+	public static final DriverFactory.DriverType BROWSER = DriverFactory.DriverType
+			.getDriver(properties.getProperty("BROWSER"));
 	public static final OSType OS = OSType.getOS();
 	private static final String PROTOCOL = properties.getProperty("PROTOCOL");
 	private static final String HOST = properties.getProperty("HOST");

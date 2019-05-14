@@ -6,8 +6,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 import utils.DriverFactory;
-import utils.DriverFactory.DriverType;
 import utils.Log;
+import utils.StoreProperties;
 
 public class BaseTest {
 	public WebDriver driver;
@@ -23,7 +23,7 @@ public class BaseTest {
 		Log.startLog("Test is starting!");
 
 		// Create a Chrome driver. All test classes use this.
-		driver = DriverFactory.getDriver(DriverType.CHROME);
+		driver = DriverFactory.getDriver(StoreProperties.BROWSER);
 
 		// Create a wait. All test classes use this.
 		wait = new WebDriverWait(driver, 15);
