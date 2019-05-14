@@ -12,7 +12,7 @@ hs_err_pid*
 browser_logs.txt
 Log4j/
 allure-results/
-ExtentReports/
+ExtentReportResults.html
 
 ##########################
 ## Maven
