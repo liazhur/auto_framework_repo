@@ -18,9 +18,9 @@ import pages.tabs.Tab;
 import steps.BasicSteps;
 import steps.FormFillSteps;
 import steps.PurchaseSteps;
+import utilities.Listeners.TestListener;
 import utils.Log;
 import utils.ExtentReports.ExtentTestManager;
-import utils.Listeners.TestListener;
 
 @Listeners({ TestListener.class })
 @Epic("Functional Test")
