@@ -27,7 +27,7 @@ import utils.Listeners.TestListener;
 @Listeners({ TestListener.class })
 @Epic("Functional Test")
 @Feature("Checkout Tests")
-public class OrderTest extends BaseTest {
+public class ProductCheckoutTest extends BaseTest {
 
 	@DataProvider(name = "products")
 	public static Object[][] getProductsMap() {
