@@ -19,7 +19,6 @@ import steps.BasicSteps;
 import steps.FormFillSteps;
 import steps.PurchaseSteps;
 import utils.Log;
-import utils.StoreProperties;
 import utils.ExtentReports.ExtentTestManager;
 import utils.Listeners.TestListener;
 
@@ -54,7 +53,7 @@ public class ProductCheckoutTest extends BaseTest {
 
 		// *************STEP METHODS********************
 		Log.info("Opening Store website.");
-		basicStep.goToURL(StoreProperties.URL);
+		basicStep.openHomePage();
 		basicStep.selectSubMenu(tab, subMenu);
 		basicStep.goToView(View.GRID);
 		basicStep.quickViewProduct(productName);

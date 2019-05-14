@@ -12,6 +12,7 @@ import pages.subcategories.View;
 import pages.tabs.Tab;
 import pages.tabs.TabsAbstractPage;
 import utils.Log;
+import utils.StoreProperties;
 
 public class BasicSteps extends MainHeaderAbstractPage {
 
@@ -19,11 +20,10 @@ public class BasicSteps extends MainHeaderAbstractPage {
 		super(driver);
 	}
 
-	// Go to Homepage
-	@Step("Open URL Step: {url}")
-	public void goToURL(String url) {
-		driver.get(url);
-		// driver.navigate().to(baseURL)
+	@Step("Go to Home Page")
+	public void openHomePage() {
+		driver.get(StoreProperties.URL);
+		Log.info("Go to Home Page");
 	}
 
 	@Step("Switch to tab: {tab}")
@@ -42,7 +42,6 @@ public class BasicSteps extends MainHeaderAbstractPage {
 	public void goToView(View view) {
 		toView(view);
 		Log.info("Oppened view");
-
 	}
 
 	@Step("Open Quick view product")
