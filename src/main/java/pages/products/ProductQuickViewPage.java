@@ -1,16 +1,16 @@
 package pages.products;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import utils.Log;
 
 public class ProductQuickViewPage extends ProductsAbstractPage {
 
-//	@FindBy(className = "fancybox-iframe")
-//	private WebElement iframeSwitchQuickView;
-	String iframeSwitchQuickViewClass = "fancybox-iframe";
+	@FindBy(className = "fancybox-iframe")
+	private WebElement iframeSwitchQuickView;
 
 	public ProductQuickViewPage(WebDriver driver) {
 		super(driver);
@@ -23,7 +23,7 @@ public class ProductQuickViewPage extends ProductsAbstractPage {
 	}
 
 	public ProductQuickViewPage switchToIframe() {
-		driver.switchTo().frame(driver.findElement(By.className(iframeSwitchQuickViewClass)));
+		driver.switchTo().frame(iframeSwitchQuickView);
 		Log.info("Switched to Product Quick View");
 		return this;
 	}
