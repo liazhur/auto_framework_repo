@@ -3,14 +3,35 @@ package pages.products;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Product {
+import org.openqa.selenium.WebDriver;
 
-	String productName;
-	String size;
-	String totalProducts;
-	String totalShippingValue;
-	String totalValue;
-	List<String> tableValues = new ArrayList<String>();
+import pages.BasePage;
+import pages.checkout.ProductTable;
+
+public class Product extends BasePage {
+
+	public Product(WebDriver driver) {
+		super(driver);
+	}
+
+	private String productName;
+	private String size;
+	private String totalProducts;
+	private String totalShippingValue;
+	private String totalValue;
+	private List<String> tableValues = new ArrayList<String>();
+	private ProductTable productTable;
+
+	public ProductTable getProductTable() {
+		if (productTable == null) {
+			productTable = new ProductTable(driver);
+		}
+		return productTable;
+	}
+
+	public void setProductTable(ProductTable productTable) {
+		this.productTable = productTable;
+	}
 
 	public String getProductName() {
 		return productName;
@@ -28,9 +49,8 @@ public class Product {
 		this.size = size;
 	}
 
-	public Product setTableValues(List<String> tableValues) {
+	public void setTableValues(List<String> tableValues) {
 		this.tableValues = tableValues;
-		return this;
 	}
 
 	public List<String> getTableValues() {

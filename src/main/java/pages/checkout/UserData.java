@@ -4,17 +4,17 @@ import java.util.Random;
 
 public class UserData {
 
-	String firstName = "Iuliia";
-	String lastName = "S";
-	String email = "email" + randomNum() + "@gmail.com";
-	String passw = generateMyPass();
-	String address = "12, Nice Address";
-	String city = "Ottawa";
-	String state = "Colorado";
-	String zip = "12345";
-	String country = "United States";
-	String mobile = "1234567892";
-	String alias = "testAddress";
+	private String firstName = "Iuliia";
+	private String lastName = "S";
+	private String email = "email" + randomNum() + "@gmail.com";
+	private String passw = generateMyPass();
+	private String address = "12, Nice Address";
+	private String city = "Ottawa";
+	private String state = "Colorado";
+	private String zip = "12345";
+	private String country = "United States";
+	private String mobile = "1234567892";
+	private String alias = "testAddress";
 
 	public String getFirstName() {
 		return firstName;
@@ -111,7 +111,7 @@ public class UserData {
 		return n;
 	}
 
-	public String generateMyPass() {
+	private String generateMyPass() {
 		int aNumber = 0;
 		aNumber = (int) ((Math.random() * 9000000) + 1000000);
 		return String.valueOf(aNumber);
