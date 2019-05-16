@@ -26,6 +26,5 @@ public class ProductQuickViewPage extends ProductsAbstractPage {
 		driver.switchTo().frame(iframeSwitchQuickView);
 		Log.info("Switched to Product Quick View");
 		return this;
-
 	}
 }
