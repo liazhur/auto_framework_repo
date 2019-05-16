@@ -9,7 +9,7 @@ import pages.BasePage;
 
 public class ShippingTabPage extends BasePage {
 
-	@FindBy(css = "input[id='cgv']")
+	@FindBy(id = "cgv")
 	private WebElement termsOfServiceCheckBox;
 
 	@FindBy(css = "button[name='processCarrier']")

@@ -126,6 +126,7 @@ public class PurchaseSteps extends MainHeaderAbstractPage {
 		return actualProduct;
 	}
 
+	@Step("Verify Product Summary information")
 	public void verifyProductSummary(String productName, String size, Product productExpected) {
 		String productDescription = getProductDescriptionFromSummaryTabPage(productExpected);
 
@@ -135,6 +136,7 @@ public class PurchaseSteps extends MainHeaderAbstractPage {
 		Assert.assertTrue(productDescription.contains(size), "Summary Tab Page doesn't contain product size " + size);
 	}
 
+	@Step("Verify Product Purchase information")
 	public void verifyProductPurchase(Product productExpected, Product productActual) {
 		Assert.assertEquals(productActual.getTotalProducts(), productExpected.getTotalProducts(),
 				"Total Products value is incorrect");

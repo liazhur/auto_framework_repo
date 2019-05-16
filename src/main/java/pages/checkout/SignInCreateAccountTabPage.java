@@ -12,7 +12,7 @@ public class SignInCreateAccountTabPage extends BasePage {
 	@FindBy(id = "email_create")
 	private WebElement emailTextBox;
 
-	@FindBy(css = "button[id='SubmitCreate']")
+	@FindBy(id = "SubmitCreate")
 	private WebElement createAccountBtn;
 
 	public SignInCreateAccountTabPage(WebDriver driver, WebDriverWait wait) {
