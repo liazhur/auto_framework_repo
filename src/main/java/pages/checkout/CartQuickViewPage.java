@@ -9,7 +9,7 @@ import pages.BasePage;
 
 public class CartQuickViewPage extends BasePage {
 
-	@FindBy(css = "div[id=layer_cart] span[title='Continue shopping']")
+	@FindBy(css = "div[id='layer_cart'] span[title='Continue shopping']")
 	private WebElement contShopBtn;
 
 	public CartQuickViewPage(WebDriver driver, WebDriverWait wait) {

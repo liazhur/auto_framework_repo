@@ -1,18 +1,15 @@
 package pages;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pages.checkout.ProductTable;
+
 public class BasePage {
-	@FindBy(css = "table[id='cart_summary']")
-	private WebElement table;
+
+	private ProductTable productTable;
 
 	public static final long PAGE_LOADING_TIMEOUT = 25;
 	public static final long ELEMENT_APPEAR_TIMEOUT = 5;
@@ -37,26 +34,17 @@ public class BasePage {
 		PageFactory.initElements(driver, this);
 	}
 
+	public ProductTable getProductTable() {
+		return new ProductTable(driver);
+	}
+
+	public void setProductTable(ProductTable productTable) {
+		this.productTable = productTable;
+	}
+
 //	 Click Method
 	public void click(By elementLocation) {
 		driver.findElement(elementLocation).click();
 	}
 
-	public List<String> getValuesFromTable() {
-		List<WebElement> tableRows = table.findElements(By.tagName("tr"));
-		List<WebElement> Cols = new ArrayList<WebElement>();
-		List<String> values = new ArrayList<String>();
-		for (int i = 0; i < tableRows.size(); i++) {
-			WebElement row = tableRows.get(i);
-		}
-		for (int i = 0; i < tableRows.size(); i++) {
-			Cols = tableRows.get(i).findElements(By.tagName("td"));
-		}
-
-		for (int j = 0; j < Cols.size(); j++) {
-			String el = Cols.get(j).getText();
-			values.add(el);
-		}
-		return values;
-	}
 }

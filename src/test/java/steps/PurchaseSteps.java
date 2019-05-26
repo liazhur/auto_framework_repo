@@ -18,6 +18,7 @@ import pages.checkout.SummaryTabPage;
 import pages.checkout.UserData;
 import pages.products.Product;
 import utils.Log;
+import utils.WebDriverHelper;
 
 public class PurchaseSteps extends MainHeaderAbstractPage {
 
@@ -35,12 +36,23 @@ public class PurchaseSteps extends MainHeaderAbstractPage {
 	public Product getProductFromSummaryTab(Product productExpected) {
 		SummaryTabPage summaryPage = new SummaryTabPage(driver);
 
-		List<String> tableValues = summaryPage.getValuesFromTable();
+		List<String> tableValues = summaryPage.getValuesFromTable(productExpected.getProductName());
 		String totalProductsValue = summaryPage.getTotalProducts().getText();
 		String totalShippingValue = summaryPage.getTotalShipping().getText();
 		String totalValue = summaryPage.getTotalValue().getText();
 
+		String description = summaryPage.getProductTable().getDescriptionUI((productExpected.getProductName()));
+		String avail = summaryPage.getProductTable().getAvailUI((productExpected.getProductName()));
+		String unitPrice = summaryPage.getProductTable().getUnitPriceUI((productExpected.getProductName()));
+		String total = summaryPage.getProductTable().getTotalUI((productExpected.getProductName()));
+
+		productExpected.getProductTable().setDescription(description);
+		productExpected.getProductTable().setAvail(avail);
+		productExpected.getProductTable().setUnitPrice(unitPrice);
+		productExpected.getProductTable().setTotal(total);
+
 		productExpected.setTableValues(tableValues);
+
 		productExpected.setTotalProducts(totalProductsValue);
 		productExpected.setTotalShippingValue(totalShippingValue);
 		productExpected.setTotalValue(totalValue);
@@ -71,6 +83,7 @@ public class PurchaseSteps extends MainHeaderAbstractPage {
 	@Step("Fill Personal Information")
 	public SummaryTabPage registerPersonalInfo(UserData data) {
 		SignInPersonalInfoTabPage persInfPage = new SignInPersonalInfoTabPage(driver, wait);
+		WebDriverHelper.waitForElementVisibility(driver, persInfPage.getFirstNameTextField(), 10);
 		persInfPage.getFirstNameTextField().sendKeys(data.getFirstName());
 		persInfPage.getLastNameTextField().sendKeys(data.getLastName());
 		persInfPage.getPasswordTextField().sendKeys(data.getPassw());
@@ -110,13 +123,25 @@ public class PurchaseSteps extends MainHeaderAbstractPage {
 	}
 
 	@Step("Get Product values from 'Payment' tab")
-	public Product getProductFromPaymentTab(Product actualProduct) {
+	public Product getProductFromPaymentTab(Product actualProduct, String productName) {
 		PaymentTabPage paymentTabPage = new PaymentTabPage(driver);
-		List<String> actualValuesList = paymentTabPage.getValuesFromTable();
+		List<String> actualValuesList = paymentTabPage.getValuesFromTable(productName);
+
+		actualProduct.setProductName(productName);
 
 		String totalProducts = paymentTabPage.getTotalProducts().getText();
 		String totalShipping = paymentTabPage.getTotalShipping().getText();
 		String totalGeneral = paymentTabPage.getTotalValue().getText();
+
+		String description = paymentTabPage.getProductTable().getDescriptionUI(productName);
+		String avail = paymentTabPage.getProductTable().getAvailUI(productName);
+		String unitPrice = paymentTabPage.getProductTable().getUnitPriceUI(productName);
+		String total = paymentTabPage.getProductTable().getTotalUI(productName);
+
+		actualProduct.getProductTable().setDescription(description);
+		actualProduct.getProductTable().setAvail(avail);
+		actualProduct.getProductTable().setUnitPrice(unitPrice);
+		actualProduct.getProductTable().setTotal(total);
 
 		actualProduct.setTableValues(actualValuesList);
 		actualProduct.setTotalProducts(totalProducts);
@@ -128,6 +153,11 @@ public class PurchaseSteps extends MainHeaderAbstractPage {
 
 	@Step("Verify Product Summary information")
 	public void verifyProductSummary(String productName, String size, Product productExpected) {
+		productExpected.setProductName(productName);
+
+		String avail = productExpected.getProductTable().getAvailUI(productName);
+		productExpected.getProductTable().setAvail(avail);
+
 		String productDescription = getProductDescriptionFromSummaryTabPage(productExpected);
 
 		Assert.assertTrue(productDescription.contains(productName),
@@ -143,8 +173,11 @@ public class PurchaseSteps extends MainHeaderAbstractPage {
 		Assert.assertEquals(productActual.getTotalShippingValue(), productExpected.getTotalShippingValue(),
 				"Shipping Value is incorrect");
 		Assert.assertEquals(productActual.getTotalValue(), productExpected.getTotalValue(), "Total Value is incorrect");
+
 		Assert.assertTrue(productActual.getTableValues().containsAll(productExpected.getTableValues()),
 				"Product Table Values are incorrect");
+
+//		Assert.assertEquals(productActual, productExpected, "Products value is incorrect");
 	}
 
 }

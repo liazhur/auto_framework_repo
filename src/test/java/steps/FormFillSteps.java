@@ -36,7 +36,7 @@ public class FormFillSteps extends MainHeaderAbstractPage {
 	public void continueShopping() {
 		CartQuickViewPage cPage = new CartQuickViewPage(driver, wait);
 		WebDriverHelper.waitForElementVisibility(driver, cPage.getContinueShoppingBtn(), 10);
-		WebDriverHelper.sleepSeconds(1);// TODO refactor
+		WebDriverHelper.sleepSeconds(10);// TODO refactor
 		WebDriverHelper.waitNextAction(driver, 3);
 		cPage.getContinueShoppingBtn().click();
 	}

@@ -48,8 +48,8 @@ public class ProductCheckoutTest extends BaseTest {
 		FormFillSteps fillFormStep = new FormFillSteps(driver, wait);
 		PurchaseSteps purchaseStep = new PurchaseSteps(driver);
 		UserData data = new UserData();
-		Product productExpected = new Product();
-		Product productActual = new Product();
+		Product productExpected = new Product(driver);
+		Product productActual = new Product(driver);
 
 		// *************STEP METHODS********************
 		Log.info("Opening Store website.");
@@ -70,7 +70,7 @@ public class ProductCheckoutTest extends BaseTest {
 		purchaseStep.registerPersonalInfo(data);
 		purchaseStep.proceedToCheckout();
 		purchaseStep.agreeTermsOfServiceProceed();
-		purchaseStep.getProductFromPaymentTab(productActual);
+		purchaseStep.getProductFromPaymentTab(productActual, productName);
 
 		purchaseStep.verifyProductPurchase(productExpected, productActual);
 	}

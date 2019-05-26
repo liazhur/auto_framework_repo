@@ -80,4 +80,66 @@ public class Product extends BasePage {
 	public String getTotalValue() {
 		return totalValue;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((productName == null) ? 0 : productName.hashCode());
+		result = prime * result + ((productTable == null) ? 0 : productTable.hashCode());
+		result = prime * result + ((size == null) ? 0 : size.hashCode());
+		result = prime * result + ((tableValues == null) ? 0 : tableValues.hashCode());
+		result = prime * result + ((totalProducts == null) ? 0 : totalProducts.hashCode());
+		result = prime * result + ((totalShippingValue == null) ? 0 : totalShippingValue.hashCode());
+		result = prime * result + ((totalValue == null) ? 0 : totalValue.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Product other = (Product) obj;
+		if (productName == null) {
+			if (other.productName != null)
+				return false;
+		} else if (!productName.equals(other.productName))
+			return false;
+		if (productTable == null) {
+			if (other.productTable != null)
+				return false;
+		} else if (!productTable.equals(other.productTable))
+			return false;
+		if (size == null) {
+			if (other.size != null)
+				return false;
+		} else if (!size.equals(other.size))
+			return false;
+		if (tableValues == null) {
+			if (other.tableValues != null)
+				return false;
+		} else if (!tableValues.equals(other.tableValues))
+			return false;
+		if (totalProducts == null) {
+			if (other.totalProducts != null)
+				return false;
+		} else if (!totalProducts.equals(other.totalProducts))
+			return false;
+		if (totalShippingValue == null) {
+			if (other.totalShippingValue != null)
+				return false;
+		} else if (!totalShippingValue.equals(other.totalShippingValue))
+			return false;
+		if (totalValue == null) {
+			if (other.totalValue != null)
+				return false;
+		} else if (!totalValue.equals(other.totalValue))
+			return false;
+		return true;
+	}
+
 }
